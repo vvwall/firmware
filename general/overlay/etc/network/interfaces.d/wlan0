@@ -1,5 +1,9 @@
+auto wlan0
 iface wlan0 inet dhcp
-    pre-up wpa_passphrase "$(fw_printenv -n wlanssid)" "$(fw_printenv -n wlanpass)" > /tmp/wpa_supplicant.conf
-    pre-up sed -i 's/#psk.*/scan_ssid=1/g' /tmp/wpa_supplicant.conf
-    pre-up wpa_supplicant -B -i wlan0 -D nl80211,wext -c /tmp/wpa_supplicant.conf
+    pre-up modprobe mac80211
+    pre-up modprobe atbm603x_wifi_usb
+    pre-up wpa_passphrase "A1" "233wott." >/tmp/wpa_supplicant.conf
+    pre-up sed -i '2i \\tscan_ssid=1' /tmp/wpa_supplicant.conf
+    pre-up sleep 1
+    pre-up wpa_supplicant -B -D nl80211 -i wlan0 -c/tmp/wpa_supplicant.conf
     post-down killall -q wpa_supplicant
