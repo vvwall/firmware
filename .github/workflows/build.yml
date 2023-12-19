@@ -20,7 +20,7 @@ jobs:
           - t31
         release:
           - lite
-          # - ultimate
+          - ultimate
         exclude:
           - platform: hi3516cv100
             release: ultimate
