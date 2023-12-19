@@ -1,5 +1,11 @@
 name: build
 on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 env:
@@ -20,12 +26,7 @@ jobs:
           - t31
         release:
           - lite
-          - ultimate
-
-        include:
-          - platform: t31
-            release: fpv
-
+          # - ultimate
         exclude:
           - platform: hi3516cv100
             release: ultimate
