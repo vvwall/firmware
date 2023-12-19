@@ -1,4 +1,4 @@
-BR_VER = 2023.02.5
+BR_VER = 2023.02.7
 BR_MAKE = $(MAKE) -C $(TARGET)/buildroot-$(BR_VER) BR2_EXTERNAL=$(PWD)/general O=$(TARGET)
 BR_LINK = https://github.com/buildroot/buildroot/archive
 BR_FILE = /tmp/buildroot-$(BR_VER).tar.gz
@@ -26,6 +26,7 @@ help:
 	- make list - show available device configurations\n \
 	- make deps - install build dependencies\n \
 	- make clean - remove defconfig and target folder\n \
+	- make package - list available packages\n \
 	- make distclean - remove buildroot and output folder\n \
 	- make br-linux - build linux kernel only\n \
 	- make all - build the device firmware\n\n"
@@ -49,6 +50,9 @@ prepare:
 
 toolname:
 	@general/scripts/show_toolchains.sh $(CONFIG)
+
+package:
+	@find general/package/* -maxdepth 0 -type d -printf "br-%f\n" | grep -v patches
 
 clean:
 	@rm -rf $(TARGET)/images $(TARGET)/target

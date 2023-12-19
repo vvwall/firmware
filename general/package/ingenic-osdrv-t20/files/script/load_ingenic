@@ -24,7 +24,7 @@ check_return() {
 
 lsmod | grep "sinfo" >/dev/null
 if [ $? -ne 0 ]; then
-	insmod ${KMOD_PATH/%\//}/sinfo.ko
+	modprobe sinfo.ko
 	check_return "insmod sinfo"
 fi
 
@@ -98,7 +98,7 @@ fi
 
 lsmod | grep "audio" >/dev/null
 if [ $? -ne 0 ]; then
-	insmod ${KMOD_PATH/%\//}/audio2.ko
+	insmod ${KMOD_PATH/%\//}/audio2.ko spk_gpio=-1
 	check_return "insmod audio"
 fi
 
